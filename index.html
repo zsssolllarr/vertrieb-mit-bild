@@ -334,23 +334,7 @@ Hinweise: ${val('produkt_hinweise')}`],
   if(systemart) systemart.addEventListener('change', applyTp2Automation);
   if(tp2Set) tp2Set.addEventListener('change', applyTp2Automation);
   applyTp2Automation();
-
-  form.addEventListener('submit', async (e)=>{
-    e.preventDefault();
-    buildSummary();
-
-    const originalText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Wird übermittelt...';
-
-    try{
-      const formData = new FormData(form);
-      const response = await fetch('/.netlify/functions/submit-feinplanung', {
-        method: 'POST',
-        body: formData
-      });
-
-      const text = await response.text();
+const text = await response.text();
       let result = {};
       try { result = JSON.parse(text); } catch(e) { result = { message: text || 'Keine Serverantwort' }; }
 
